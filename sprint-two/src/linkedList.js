@@ -9,8 +9,9 @@ var LinkedList = function() {
     list[newNode.value] = newNode;
 
     if ( list.head === null ) {
-      list.head = newNode;
-      // list.head.next = null;
+      list.head = {};
+      list.head.value = newNode.value;
+      list.head.next = null;
     } else {
       list.tail.next = newNode.value; 
     }
