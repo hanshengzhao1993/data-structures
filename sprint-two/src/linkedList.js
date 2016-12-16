@@ -33,12 +33,33 @@ var LinkedList = function() {
 
   list.contains = function(target) {
     for (var key in list) {
-      if ( key == target) {
+
+      if ( parseInt(key) === target) {
         return true;
       }
     }
     return false;
   };
+
+  list.addToHead = function (value) {
+    var headNode = Node(value);
+
+    list[headNode.value] = headNode;
+
+    if ( list.tail === null ) {
+      list.tail = {};
+      list.tail.value = headNode.value;
+      list.tail.next = null;
+    } else {
+      list.head.next = headNode.value; 
+    }
+    // list.head.next = null;
+    list.head = headNode;
+
+
+
+  };
+
   return list;
 };
 

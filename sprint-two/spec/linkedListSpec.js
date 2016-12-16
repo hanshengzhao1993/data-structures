@@ -51,5 +51,15 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
+  it('should be able to add to head and designate a new head', function() {
+    linkedList.addToHead(4);
+    expect(linkedList.head.value).to.equal(4);
+    linkedList.addToHead(5);
+    expect(linkedList.head.value).to.equal(5);
+  });
+
+
+
+
   // add more tests here to test the functionality of linkedList
 });
