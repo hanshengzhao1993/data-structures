@@ -1,20 +1,80 @@
 
 
 var HashTable = function() {
+  this._currentCount = 0;
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
 };
 
 HashTable.prototype.insert = function(k, v) {
-  var index = getIndexBelowMaxForKey(k, this._limit);
+
+  if ( this._currentCount < (0.75 * this._limit) ) {
+    var index = getIndexBelowMaxForKey(k, this._limit);
+    
   
+    if ( this._storage.get(index) === undefined ) {
+      this._storage[index] = [];
+    }
+    this._storage.set(index, (this._storage[index]).push([ k, v ]) );
+    this._currentCount++; 
+  } else if ( this._currentCount >= (0.75 * this._limit) ) {
 
-  if ( this._storage.get(index) === undefined ) {
-    this._storage[index] = [];
+    this._limit = this._limit * 2;
+
+     
+    var temp = [];
+    temp.push([k, v]);
+    _.each(this._storage, function(element, key, obj) {
+      if ( Array.isArray( element ) ) {
+        _.each(element, function(ele, idx) {
+          temp.push(ele);
+        });
+        delete obj[key];
+      }
+    });
+    // this._storage = {};
+
+    // console.log('new array: ', temp);
+    // console.log('this', this);
+
+    for (var i = 0; i < temp.length; i++) {
+      console.log(temp[i]);
+      var index1 = getIndexBelowMaxForKey(temp[i][0], this._limit);
+
+      // console.log(index1, "  this is the index");
+      if ( this._storage[index1] === undefined ) {
+        this._storage[index1] = [];
+      }
+      console.log(this)
+      console.log('this is i ',i);
+
+
+      // this._storage.set(index1, (this._storage[index1]).push(temp[i]) );
+
+
+    }
+
+    // console.log(this._storage, "  storyag");
+
+    // _.each(temp, function (item) {
+
+
+    //   console.log("inside loop");
+    //   var index1 = getIndexBelowMaxForKey(item[0], this._limit);
+       
+      // if ( this._storage[index1] === undefined ) {
+      //   this._storage[index1] = [];
+      // }
+
+      // this._storage.set(index1, (this._storage[index1]).push(item) );
+      // this._currentCount++;
+
+
+    // });
+
+
+
   }
-
-  // console.log(this._storage[index]);
-  this._storage.set(index, (this._storage[index]).push([ k, v ]) );
 
 };
 
@@ -31,7 +91,7 @@ HashTable.prototype.retrieve = function(k) {
     }
   }
 
-  console.log('location : ',location, '        index: ',index);
+  // console.log('location : ',location, '        index: ',index);
 
   // this._storage[index].each(function (element, idx) {
   //   if (element[0] === k) {
