@@ -29,75 +29,43 @@ HashTable.prototype.insert = function(k, v) {
         _.each(element, function(ele, idx) {
           temp.push(ele);
         });
+        // console.log(key);
         delete obj[key];
+        // console.log()
       }
+      console.log(this._storage)
     });
-    // this._storage = {};
+    // console.log(this._storage)
 
-    // console.log('new array: ', temp);
-    // console.log('this', this);
+    for (var n = 0; n < temp.length; n++) {
+      var index1 = getIndexBelowMaxForKey(temp[n][0], this._limit);
 
-    for (var i = 0; i < temp.length; i++) {
-      console.log(temp[i]);
-      var index1 = getIndexBelowMaxForKey(temp[i][0], this._limit);
-
-      // console.log(index1, "  this is the index");
       if ( this._storage[index1] === undefined ) {
         this._storage[index1] = [];
       }
-      console.log(this)
-      console.log('this is i ',i);
 
-
-      // this._storage.set(index1, (this._storage[index1]).push(temp[i]) );
-
-
+      // this._storage[index1][0] = [temp[n][0], temp[n][1]];
+      this._storage[index1].push(temp[n]);
     }
-
-    // console.log(this._storage, "  storyag");
-
-    // _.each(temp, function (item) {
-
-
-    //   console.log("inside loop");
-    //   var index1 = getIndexBelowMaxForKey(item[0], this._limit);
-       
-      // if ( this._storage[index1] === undefined ) {
-      //   this._storage[index1] = [];
-      // }
-
-      // this._storage.set(index1, (this._storage[index1]).push(item) );
-      // this._currentCount++;
-
-
-    // });
-
-
-
   }
+  // console.log(this._storage);
 
 };
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var location;
+
   // console.log(this._storage)
 
   for (var i = 0; i < this._storage[index].length; i++) {
-    // console.log(' look here' + this._storage[index][i][0]);
-    if ( this._storage[index][i][0] === k) {
 
+    if ( this._storage[index][i][0] === k) {
       location = i;
+      // console.log(this._storage[index][i][0] , '  and ' , k)
     }
   }
-
-  // console.log('location : ',location, '        index: ',index);
-
-  // this._storage[index].each(function (element, idx) {
-  //   if (element[0] === k) {
-  //     location = idx;
-  //   }
-  // });
+ 
 
   return this._storage[index][location][1];
 
