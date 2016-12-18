@@ -59,8 +59,8 @@ HashTable.prototype.retrieve = function(k) {
       // console.log(this._storage[index][i][0] , '  and ' , k)
     }
   }
-  console.log(this._storage)
-  console.log(this._storage[index][location])
+  // console.log(this._storage)
+  // console.log(this._storage[index][location])
   return this._storage[index][location][1];
 };
 
@@ -92,7 +92,7 @@ HashTable.prototype.remove = function(k) {
         });
         delete obj[key];
       }
-      console.log(this._storage)
+      // console.log(this._storage)
     });
 
     for (var n = 0; n < temp.length; n++) {
