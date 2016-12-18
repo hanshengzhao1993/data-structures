@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Functional</title>
+    <script type="text/javascript" src="../src/functional/queue.js"></script>
+
+
+  </head>
+  <body>
+    <script> 
+    var array2 = [];
+    var startTime = new Date();
+    for(var i = 0; i <100000; i++) {
+     array2[i] = Queue();
+    }
+    var endTime = new Date();
+    var diff = endTime - startTime;
+    // console.log(diff)
+     
+    </script>
+    <h1>Functional in ms :</h1>
+    <h1>  <script type="text/javascript"> document.write(diff)</script></h1>>
+  </body>
+</html>
